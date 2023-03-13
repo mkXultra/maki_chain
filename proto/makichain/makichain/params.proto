@@ -1,0 +1,12 @@
+syntax = "proto3";
+package mkxultra.maki_chain.makichain;
+
+import "gogoproto/gogo.proto";
+
+option go_package = "github.com/mkXultra/maki_chain/x/makichain/types";
+
+// Params defines the parameters for the module.
+message Params {
+  option (gogoproto.goproto_stringer) = false;
+  
+}
