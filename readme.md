@@ -1,5 +1,6 @@
-# makichain
-**makichain** is a blockchain built using Cosmos SDK and Tendermint and created with [Ignite CLI](https://ignite.com/cli).
+# maki_chain
+
+maki_chain is a Chain that allows anyone to mint original tokens
 
 ## Get started
 
