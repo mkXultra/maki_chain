@@ -1,0 +1,7 @@
+syntax = "proto3";
+package mkxultra.maki_chain.maki;
+
+option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
+
+// Msg defines the Msg service.
+service Msg {}

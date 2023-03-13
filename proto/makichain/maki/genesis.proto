@@ -1,0 +1,12 @@
+syntax = "proto3";
+package mkxultra.maki_chain.maki;
+
+import "gogoproto/gogo.proto";
+import "makichain/maki/params.proto";
+
+option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
+
+// GenesisState defines the maki module's genesis state.
+message GenesisState {
+  Params params = 1 [(gogoproto.nullable) = false];
+}
