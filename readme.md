@@ -44,10 +44,20 @@ curl https://get.ignite.com/mkXultra/maki_chain@latest! | sudo bash
 ```
 `mkXultra/maki_chain` should match the `username` and `repo_name` of the Github repository to which the source code was pushed. Learn more about [the install process](https://github.com/allinbits/starport-installer).
 
-## Learn more
 
-- [Ignite CLI](https://ignite.com/cli)
-- [Tutorials](https://docs.ignite.com/guide)
-- [Ignite CLI docs](https://docs.ignite.com)
-- [Cosmos SDK docs](https://docs.cosmos.network)
-- [Developer Chat](https://discord.gg/ignite)
+## TODO 
+[ ] make proto files
+  [ ] mint
+  [ ] burning
+  [ ] swap
+  [ ] is burunging
+[ ] make keeper methods
+  [ ] mint
+  [ ] burning
+  [ ] swap
+  [ ] is burunging
+[ ] make cli methods
+  [ ] mint
+  [ ] burning
+  [ ] swap
+  [ ] is burunging
