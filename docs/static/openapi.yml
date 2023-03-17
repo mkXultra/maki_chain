@@ -43864,10 +43864,10 @@ paths:
                         }
       tags:
         - Query
-  /mkXultra/maki_chain/makichain/params:
+  /mkXultra/maki_chain/maki/params:
     get:
       summary: Parameters queries the parameters of the module.
-      operationId: MkxultraMakiChainMakichainParams
+      operationId: MkxultraMakiChainMakiParams
       responses:
         '200':
           description: A successful response.
@@ -71434,10 +71434,18 @@ definitions:
     description: |-
       Version defines the versioning scheme used to negotiate the IBC verison in
       the connection handshake.
-  mkxultra.maki_chain.makichain.Params:
+  mkxultra.maki_chain.maki.MsgBurnTokenResponse:
+    type: object
+  mkxultra.maki_chain.maki.MsgIsBurningResponse:
+    type: object
+  mkxultra.maki_chain.maki.MsgMintTokenResponse:
+    type: object
+  mkxultra.maki_chain.maki.MsgSwapResponse:
+    type: object
+  mkxultra.maki_chain.maki.Params:
     type: object
     description: Params defines the parameters for the module.
-  mkxultra.maki_chain.makichain.QueryParamsResponse:
+  mkxultra.maki_chain.maki.QueryParamsResponse:
     type: object
     properties:
       params:

@@ -103,9 +103,10 @@ import (
 	tmos "github.com/tendermint/tendermint/libs/os"
 	dbm "github.com/tendermint/tm-db"
 
-	makichainmodule "github.com/mkXultra/maki_chain/x/makichain"
-	makichainmodulekeeper "github.com/mkXultra/maki_chain/x/makichain/keeper"
-	makichainmoduletypes "github.com/mkXultra/maki_chain/x/makichain/types"
+	makimodule "github.com/mkXultra/maki_chain/x/maki"
+	makimodulekeeper "github.com/mkXultra/maki_chain/x/maki/keeper"
+	makimoduletypes "github.com/mkXultra/maki_chain/x/maki/types"
+
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	appparams "github.com/mkXultra/maki_chain/app/params"
@@ -164,7 +165,7 @@ var (
 		transfer.AppModuleBasic{},
 		ica.AppModuleBasic{},
 		vesting.AppModuleBasic{},
-		makichainmodule.AppModuleBasic{},
+		makimodule.AppModuleBasic{},
 		// this line is used by starport scaffolding # stargate/app/moduleBasic
 	)
 
@@ -238,7 +239,7 @@ type App struct {
 	ScopedTransferKeeper capabilitykeeper.ScopedKeeper
 	ScopedICAHostKeeper  capabilitykeeper.ScopedKeeper
 
-	MakichainKeeper makichainmodulekeeper.Keeper
+	MakiKeeper makimodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
 
 	// mm is the module manager
@@ -283,7 +284,7 @@ func New(
 		paramstypes.StoreKey, ibchost.StoreKey, upgradetypes.StoreKey, feegrant.StoreKey, evidencetypes.StoreKey,
 		ibctransfertypes.StoreKey, icahosttypes.StoreKey, capabilitytypes.StoreKey, group.StoreKey,
 		icacontrollertypes.StoreKey,
-		makichainmoduletypes.StoreKey,
+		makimoduletypes.StoreKey,
 		// this line is used by starport scaffolding # stargate/app/storeKey
 	)
 	tkeys := sdk.NewTransientStoreKeys(paramstypes.TStoreKey)
@@ -495,13 +496,13 @@ func New(
 		govConfig,
 	)
 
-	app.MakichainKeeper = *makichainmodulekeeper.NewKeeper(
+	app.MakiKeeper = *makimodulekeeper.NewKeeper(
 		appCodec,
-		keys[makichainmoduletypes.StoreKey],
-		keys[makichainmoduletypes.MemStoreKey],
-		app.GetSubspace(makichainmoduletypes.ModuleName),
+		keys[makimoduletypes.StoreKey],
+		keys[makimoduletypes.MemStoreKey],
+		app.GetSubspace(makimoduletypes.ModuleName),
 	)
-	makichainModule := makichainmodule.NewAppModule(appCodec, app.MakichainKeeper, app.AccountKeeper, app.BankKeeper)
+	makiModule := makimodule.NewAppModule(appCodec, app.MakiKeeper, app.AccountKeeper, app.BankKeeper)
 
 	// this line is used by starport scaffolding # stargate/app/keeperDefinition
 
@@ -568,7 +569,7 @@ func New(
 		params.NewAppModule(app.ParamsKeeper),
 		transferModule,
 		icaModule,
-		makichainModule,
+		makiModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 
@@ -598,7 +599,7 @@ func New(
 		group.ModuleName,
 		paramstypes.ModuleName,
 		vestingtypes.ModuleName,
-		makichainmoduletypes.ModuleName,
+		makimoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	)
 
@@ -623,7 +624,7 @@ func New(
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
-		makichainmoduletypes.ModuleName,
+		makimoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	)
 
@@ -653,7 +654,7 @@ func New(
 		paramstypes.ModuleName,
 		upgradetypes.ModuleName,
 		vestingtypes.ModuleName,
-		makichainmoduletypes.ModuleName,
+		makimoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	)
 
@@ -683,7 +684,7 @@ func New(
 		evidence.NewAppModule(app.EvidenceKeeper),
 		ibc.NewAppModule(app.IBCKeeper),
 		transferModule,
-		makichainModule,
+		makiModule,
 		// this line is used by starport scaffolding # stargate/app/appModule
 	)
 	app.sm.RegisterStoreDecoders()
@@ -888,7 +889,7 @@ func initParamsKeeper(appCodec codec.BinaryCodec, legacyAmino *codec.LegacyAmino
 	paramsKeeper.Subspace(ibchost.ModuleName)
 	paramsKeeper.Subspace(icacontrollertypes.SubModuleName)
 	paramsKeeper.Subspace(icahosttypes.SubModuleName)
-	paramsKeeper.Subspace(makichainmoduletypes.ModuleName)
+	paramsKeeper.Subspace(makimoduletypes.ModuleName)
 	// this line is used by starport scaffolding # stargate/app/paramSubspace
 
 	return paramsKeeper
