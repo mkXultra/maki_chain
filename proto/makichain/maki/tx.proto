@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package mkxultra.maki_chain.maki;
 
 import "gogoproto/gogo.proto";
@@ -8,44 +9,40 @@ option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc MintToken(MsgMintToken) returns (MsgMintTokenResponse);
-  rpc BurnToken(MsgBurnToken) returns (MsgBurnTokenResponse);
-  rpc IsBurning(MsgIsBurning) returns (MsgIsBurningResponse);
-  rpc Swap(MsgSwap) returns (MsgSwapResponse);
+  rpc MintToken (MsgMintToken) returns (MsgMintTokenResponse);
+  rpc BurnToken (MsgBurnToken) returns (MsgBurnTokenResponse);
+  rpc IsBurning (MsgIsBurning) returns (MsgIsBurningResponse);
+  rpc Swap      (MsgSwap     ) returns (MsgSwapResponse     );
 }
+
 
 message MsgMintToken {
-  string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
-  cosmos.base.v1beta1.Coin amount = 2 [
-    (gogoproto.nullable) = false,
-    (gogoproto.moretags) = "yaml:\"amount\""
-  ];
+  string                   creator = 1;
+  cosmos.base.v1beta1.Coin amount  = 2 [(gogoproto.nullable) = false];
 }
+
 message MsgMintTokenResponse {}
 
-
 message MsgBurnToken {
-  string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
-  string type = 2  [ (gogoproto.moretags) = "yaml:\"type\"" ];
-  cosmos.base.v1beta1.Coin amount = 3 [
-    (gogoproto.nullable) = false,
-    (gogoproto.moretags) = "yaml:\"amount\""
-  ];
+  string                   creator  = 1;
+  string                   burnType = 2;
+  cosmos.base.v1beta1.Coin amount   = 3 [(gogoproto.nullable) = false];
 }
+
 message MsgBurnTokenResponse {}
 
 message MsgIsBurning {
-  string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
-  string type = 2  [ (gogoproto.moretags) = "yaml:\"type\"" ];
+  string creator  = 1;
+  string burnType = 2;
 }
+
 message MsgIsBurningResponse {}
 
 message MsgSwap {
-  string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
-  cosmos.base.v1beta1.Coin amount = 2 [
-    (gogoproto.nullable) = false,
-    (gogoproto.moretags) = "yaml:\"amount\""
-  ];
-  string denom = 3; 
+  string                   creator = 1;
+  cosmos.base.v1beta1.Coin amount  = 2 [(gogoproto.nullable) = false];
+  string                   denom   = 3;
 }
+
 message MsgSwapResponse {}
+
