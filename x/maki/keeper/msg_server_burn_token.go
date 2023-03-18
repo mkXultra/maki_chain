@@ -10,8 +10,7 @@ import (
 func (k msgServer) BurnToken(goCtx context.Context, msg *types.MsgBurnToken) (*types.MsgBurnTokenResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	k.keeper.BurnToken(ctx, msg)
 
 	return &types.MsgBurnTokenResponse{}, nil
 }

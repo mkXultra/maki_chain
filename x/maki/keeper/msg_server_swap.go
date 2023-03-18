@@ -10,8 +10,7 @@ import (
 func (k msgServer) Swap(goCtx context.Context, msg *types.MsgSwap) (*types.MsgSwapResponse, error) {
 	ctx := sdk.UnwrapSDKContext(goCtx)
 
-	// TODO: Handling the message
-	_ = ctx
+	k.keeper.Swap(ctx, msg)
 
 	return &types.MsgSwapResponse{}, nil
 }
