@@ -1,26 +1,58 @@
 syntax = "proto3";
+
 package mkxultra.maki_chain.maki;
 
 import "gogoproto/gogo.proto";
 import "google/api/annotations.proto";
 import "cosmos/base/query/v1beta1/pagination.proto";
 import "makichain/maki/params.proto";
+import "makichain/maki/maki.proto";
 
 option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
 
 // Query defines the gRPC querier service.
 service Query {
+  
   // Parameters queries the parameters of the module.
-  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+  rpc Params (QueryParamsRequest) returns (QueryParamsResponse) {
     option (google.api.http).get = "/mkXultra/maki_chain/maki/params";
+  
+  }
+  
+  // Queries a list of Maki items.
+  rpc Maki    (QueryGetMakiRequest) returns (QueryGetMakiResponse) {
+    option (google.api.http).get = "/mkXultra/maki_chain/maki/maki/{id}";
+  
+  }
+  rpc MakiAll (QueryAllMakiRequest) returns (QueryAllMakiResponse) {
+    option (google.api.http).get = "/mkXultra/maki_chain/maki/maki";
+  
   }
 }
-
 // QueryParamsRequest is request type for the Query/Params RPC method.
 message QueryParamsRequest {}
 
 // QueryParamsResponse is response type for the Query/Params RPC method.
 message QueryParamsResponse {
+  
   // params holds all the parameters of this module.
   Params params = 1 [(gogoproto.nullable) = false];
 }
+
+message QueryGetMakiRequest {
+  uint64 id = 1;
+}
+
+message QueryGetMakiResponse {
+  Maki Maki = 1 [(gogoproto.nullable) = false];
+}
+
+message QueryAllMakiRequest {
+  cosmos.base.query.v1beta1.PageRequest pagination = 1;
+}
+
+message QueryAllMakiResponse {
+  repeated Maki                                   Maki       = 1 [(gogoproto.nullable) = false];
+           cosmos.base.query.v1beta1.PageResponse pagination = 2;
+}
+
