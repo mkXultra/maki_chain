@@ -9,12 +9,13 @@ option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
 
 // Msg defines the Msg service.
 service Msg {
-  rpc MintToken  (MsgMintToken ) returns (MsgMintTokenResponse );
-  rpc BurnToken  (MsgBurnToken ) returns (MsgBurnTokenResponse );
-  rpc IsBurning  (MsgIsBurning ) returns (MsgIsBurningResponse );
-  rpc Swap       (MsgSwap      ) returns (MsgSwapResponse      );
-  rpc CreateMaki (MsgCreateMaki) returns (MsgCreateMakiResponse);
+  rpc MintToken (MsgMintToken) returns (MsgMintTokenResponse);
+  rpc BurnToken (MsgBurnToken) returns (MsgBurnTokenResponse);
+  rpc IsBurning (MsgIsBurning) returns (MsgIsBurningResponse);
+  rpc Swap      (MsgSwap     ) returns (MsgSwapResponse     );
 }
+
+
 message MsgMintToken {
   string                   creator = 1;
   cosmos.base.v1beta1.Coin amount  = 2 [(gogoproto.nullable) = false];
@@ -44,12 +45,4 @@ message MsgSwap {
 }
 
 message MsgSwapResponse {}
-
-message MsgCreateMaki {
-  string                   creator     = 1;
-  cosmos.base.v1beta1.Coin unit        = 2 [(gogoproto.nullable) = false];
-  int32                    expiredHour = 3;
-}
-
-message MsgCreateMakiResponse {}
 

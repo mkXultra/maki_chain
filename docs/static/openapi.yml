@@ -71436,8 +71436,6 @@ definitions:
       the connection handshake.
   mkxultra.maki_chain.maki.MsgBurnTokenResponse:
     type: object
-  mkxultra.maki_chain.maki.MsgCreateMakiResponse:
-    type: object
   mkxultra.maki_chain.maki.MsgIsBurningResponse:
     type: object
   mkxultra.maki_chain.maki.MsgMintTokenResponse:

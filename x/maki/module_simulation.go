@@ -40,10 +40,6 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSwap int = 100
 
-	opWeightMsgCreateMaki = "op_weight_msg_create_maki"
-	// TODO: Determine the simulation weight value
-	defaultWeightMsgCreateMaki int = 100
-
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -120,17 +116,6 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgSwap,
 		makisimulation.SimulateMsgSwap(am.accountKeeper, am.bankKeeper, am.keeper),
-	))
-
-	var weightMsgCreateMaki int
-	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateMaki, &weightMsgCreateMaki, nil,
-		func(_ *rand.Rand) {
-			weightMsgCreateMaki = defaultWeightMsgCreateMaki
-		},
-	)
-	operations = append(operations, simulation.NewWeightedOperation(
-		weightMsgCreateMaki,
-		makisimulation.SimulateMsgCreateMaki(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation
