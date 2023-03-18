@@ -7,7 +7,7 @@ import (
 	svrcmd "github.com/cosmos/cosmos-sdk/server/cmd"
 
 	"github.com/mkXultra/maki_chain/app"
-	"github.com/mkXultra/maki_chain/cmd/maki_chaind/cmd"
+	"github.com/mkXultra/maki_chain/cmd/makid/cmd"
 )
 
 func main() {

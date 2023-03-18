@@ -9,7 +9,7 @@ option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
 // Msg defines the Msg service.
 service Msg {
   rpc MintToken(MsgMintToken) returns (MsgMintTokenResponse);
-  rpc Burn(MsgBurnToken) returns (MsgBurnTokenResponse);
+  rpc BurnToken(MsgBurnToken) returns (MsgBurnTokenResponse);
   rpc IsBurning(MsgIsBurning) returns (MsgIsBurningResponse);
   rpc Swap(MsgSwap) returns (MsgSwapResponse);
 }
@@ -18,7 +18,7 @@ message MsgMintToken {
   string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
   cosmos.base.v1beta1.Coin amount = 2 [
     (gogoproto.nullable) = false,
-    (gogoproto.castrepeated) = "github.com/cosmos/cosmos-sdk/types.Coins"
+    (gogoproto.moretags) = "yaml:\"amount\""
   ];
 }
 message MsgMintTokenResponse {}
@@ -26,15 +26,26 @@ message MsgMintTokenResponse {}
 
 message MsgBurnToken {
   string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
+  string type = 2  [ (gogoproto.moretags) = "yaml:\"type\"" ];
+  cosmos.base.v1beta1.Coin amount = 3 [
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"amount\""
+  ];
 }
 message MsgBurnTokenResponse {}
 
 message MsgIsBurning {
   string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
+  string type = 2  [ (gogoproto.moretags) = "yaml:\"type\"" ];
 }
 message MsgIsBurningResponse {}
 
 message MsgSwap {
   string sender = 1 [ (gogoproto.moretags) = "yaml:\"owner\"" ];
+  cosmos.base.v1beta1.Coin amount = 2 [
+    (gogoproto.nullable) = false,
+    (gogoproto.moretags) = "yaml:\"amount\""
+  ];
+  string denom = 3; 
 }
 message MsgSwapResponse {}
