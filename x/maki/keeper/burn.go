@@ -7,6 +7,7 @@ import (
 )
 
 func (k Keeper) BurnToken(ctx sdk.Context, msg *types.MsgBurnToken) error {
+
 	return nil
 }
 

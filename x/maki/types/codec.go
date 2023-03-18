@@ -12,6 +12,7 @@ func RegisterCodec(cdc *codec.LegacyAmino) {
 	cdc.RegisterConcrete(&MsgBurnToken{}, "maki/BurnToken", nil)
 	cdc.RegisterConcrete(&MsgIsBurning{}, "maki/IsBurning", nil)
 	cdc.RegisterConcrete(&MsgSwap{}, "maki/Swap", nil)
+	cdc.RegisterConcrete(&MsgCreateMaki{}, "maki/CreateMaki", nil)
 	// this line is used by starport scaffolding # 2
 }
 
@@ -27,6 +28,9 @@ func RegisterInterfaces(registry cdctypes.InterfaceRegistry) {
 	)
 	registry.RegisterImplementations((*sdk.Msg)(nil),
 		&MsgSwap{},
+	)
+	registry.RegisterImplementations((*sdk.Msg)(nil),
+		&MsgCreateMaki{},
 	)
 	// this line is used by starport scaffolding # 3
 
