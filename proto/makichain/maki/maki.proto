@@ -1,0 +1,13 @@
+syntax = "proto3";
+package mkxultra.maki_chain.maki;
+
+option go_package = "github.com/mkXultra/maki_chain/x/maki/types";
+import "gogoproto/gogo.proto"; 
+import "cosmos/base/v1beta1/coin.proto"; 
+
+message Maki {
+  uint64 id = 1;
+  cosmos.base.v1beta1.Coin unit = 2 [(gogoproto.nullable) = false]; 
+  uint64 expiredHour = 3; 
+  string creator = 4;
+}

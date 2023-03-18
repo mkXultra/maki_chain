@@ -40,6 +40,18 @@ const (
 	// TODO: Determine the simulation weight value
 	defaultWeightMsgSwap int = 100
 
+	opWeightMsgCreateMaki = "op_weight_msg_maki"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgCreateMaki int = 100
+
+	opWeightMsgUpdateMaki = "op_weight_msg_maki"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgUpdateMaki int = 100
+
+	opWeightMsgDeleteMaki = "op_weight_msg_maki"
+	// TODO: Determine the simulation weight value
+	defaultWeightMsgDeleteMaki int = 100
+
 	// this line is used by starport scaffolding # simapp/module/const
 )
 
@@ -51,6 +63,17 @@ func (AppModule) GenerateGenesisState(simState *module.SimulationState) {
 	}
 	makiGenesis := types.GenesisState{
 		Params: types.DefaultParams(),
+		MakiList: []types.Maki{
+			{
+				Id:      0,
+				Creator: sample.AccAddress(),
+			},
+			{
+				Id:      1,
+				Creator: sample.AccAddress(),
+			},
+		},
+		MakiCount: 2,
 		// this line is used by starport scaffolding # simapp/module/genesisState
 	}
 	simState.GenState[types.ModuleName] = simState.Cdc.MustMarshalJSON(&makiGenesis)
@@ -116,6 +139,39 @@ func (am AppModule) WeightedOperations(simState module.SimulationState) []simtyp
 	operations = append(operations, simulation.NewWeightedOperation(
 		weightMsgSwap,
 		makisimulation.SimulateMsgSwap(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgCreateMaki int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgCreateMaki, &weightMsgCreateMaki, nil,
+		func(_ *rand.Rand) {
+			weightMsgCreateMaki = defaultWeightMsgCreateMaki
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgCreateMaki,
+		makisimulation.SimulateMsgCreateMaki(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgUpdateMaki int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgUpdateMaki, &weightMsgUpdateMaki, nil,
+		func(_ *rand.Rand) {
+			weightMsgUpdateMaki = defaultWeightMsgUpdateMaki
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgUpdateMaki,
+		makisimulation.SimulateMsgUpdateMaki(am.accountKeeper, am.bankKeeper, am.keeper),
+	))
+
+	var weightMsgDeleteMaki int
+	simState.AppParams.GetOrGenerate(simState.Cdc, opWeightMsgDeleteMaki, &weightMsgDeleteMaki, nil,
+		func(_ *rand.Rand) {
+			weightMsgDeleteMaki = defaultWeightMsgDeleteMaki
+		},
+	)
+	operations = append(operations, simulation.NewWeightedOperation(
+		weightMsgDeleteMaki,
+		makisimulation.SimulateMsgDeleteMaki(am.accountKeeper, am.bankKeeper, am.keeper),
 	))
 
 	// this line is used by starport scaffolding # simapp/module/operation

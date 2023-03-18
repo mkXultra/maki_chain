@@ -14,6 +14,15 @@ func TestGenesis(t *testing.T) {
 	genesisState := types.GenesisState{
 		Params: types.DefaultParams(),
 
+		MakiList: []types.Maki{
+			{
+				Id: 0,
+			},
+			{
+				Id: 1,
+			},
+		},
+		MakiCount: 2,
 		// this line is used by starport scaffolding # genesis/test/state
 	}
 
@@ -25,5 +34,7 @@ func TestGenesis(t *testing.T) {
 	nullify.Fill(&genesisState)
 	nullify.Fill(got)
 
+	require.ElementsMatch(t, genesisState.MakiList, got.MakiList)
+	require.Equal(t, genesisState.MakiCount, got.MakiCount)
 	// this line is used by starport scaffolding # genesis/test/assert
 }
